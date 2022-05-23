@@ -1,7 +1,24 @@
-#generateButton{
-    background-color: red;
-    color: white;
-    font-weight: 700;
-    border-radius: 5px;
-    padding: 1em 2em;
+*{
+    box-sizing: border-box;
+    /* padding: 0;
+    margin: 0; */
+}
+
+
+.generateButton {
+	background-color: rgb(58, 192, 27);
+	color: white;
+	font-weight: 700;
+	border-radius: 5px;
+	padding: 1em 2em;
+}
+
+.row{
+    display: flex;
+}
+
+.container{
+    width: 50%;
+    height: 250px;
+    text-align: center;
 }

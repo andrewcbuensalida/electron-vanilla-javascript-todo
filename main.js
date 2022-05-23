@@ -1,11 +1,11 @@
 const { app, BrowserWindow } = require("electron");
-const path = require('path')
-
+const path = require("path");
 
 // for live reload
 try {
 	require("electron-reloader")(module);
 } catch (_) {}
+
 
 
 const createWindow = () => {
@@ -22,7 +22,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
 	createWindow();
-    app.on("window-all-closed", () => {
+	app.on("window-all-closed", () => {
 		if (process.platform !== "darwin") app.quit();
 	});
 });

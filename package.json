@@ -21,7 +21,9 @@
 	"author": "Andrew Buensalida",
 	"license": "ISC",
 	"dependencies": {
-		"electron-squirrel-startup": "^1.0.0"
+		"dotenv": "^16.0.1",
+		"electron-squirrel-startup": "^1.0.0",
+		"pg": "^8.7.3"
 	},
 	"config": {
 		"forge": {

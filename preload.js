@@ -1,10 +1,14 @@
-window.addEventListener("DOMContentLoaded", () => {
-	const replaceText = (selector, text) => {
-		const element = document.getElementById(selector);
-		if (element) element.innerText = text;
-	};
+const { contextBridge } = require("electron");
+const db = require("./db");
 
-	for (const dependency of ["chrome", "node", "electron"]) {
-		replaceText(`${dependency}-version`, process.versions[dependency]);
-	}
+async function getDoctor() {
+	const doctorData = await db.query(
+		`SELECT * FROM doctors LEFT JOIN (SELECT doctor_id, COUNT(*), TRUNC(AVG(rating),1) AS average_rating FROM reviews GROUP BY doctor_id) reviews ON doctors.id = reviews.doctor_id ORDER BY name OFFSET 0 LIMIT 40 ;`
+	);
+	const doctor = doctorData.rows[Math.floor(Math.random() * 40)];
+	return doctor;
+}
+
+contextBridge.exposeInMainWorld("pg", {
+	getDoctor,
 });
