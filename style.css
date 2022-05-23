@@ -1,0 +1,7 @@
+#generateButton{
+    background-color: red;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 1em 2em;
+}
