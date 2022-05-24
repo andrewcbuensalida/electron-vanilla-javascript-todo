@@ -1,3 +1,4 @@
+// contextBridge doesn't work in main.js
 const { contextBridge } = require("electron");
 const postgres = require("./db/postgres");
 
