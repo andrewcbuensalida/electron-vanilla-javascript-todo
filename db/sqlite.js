@@ -5,7 +5,7 @@ const { open } = require("sqlite");
 // you would have to import / invoke this in another file
 module.exports =  async function sqlite () {
   return open({
-    filename: '../mySqlitee.db',
+    filename: '../mySqlite100.db',
     driver: sqlite3.Database
   })
 }

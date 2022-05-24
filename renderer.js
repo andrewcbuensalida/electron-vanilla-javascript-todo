@@ -26,23 +26,22 @@ generateDoctor.addEventListener("click", async () => {
 });
 
 ///////////////////////////////////////////////
-const insertProductButton = document.getElementById("insertProductButton");
 
-const productsDiv = document.getElementById("products");
 
 async function getProducts() {
 	const products = await window.sqlite.getProducts();
-
+	
 	for (let i = 0; i < products.length; i++) {
-		insertProduct(products[i].id, products[i].name, products[i].date);
+		insertProduct(products[i].id, products[i].name, products[i].time);
 	}
 }
 
 getProducts();
 
-function insertProduct(id, name, date) {
+function insertProduct(id, name, time) {
+	const productsDiv = document.getElementById("products");
 	const productDiv = document.createElement("div");
-	productDiv.innerHTML = "id: " + id + ", name: " + name + ", date: " + date;
+	productDiv.innerHTML = "id: " + id + ", name: " + name + ", time: " + time;
 	productDiv.setAttribute("id", id);
 	productDiv.addEventListener("click", () => {
 		window.sqlite.deleteProduct(id);
@@ -52,7 +51,8 @@ function insertProduct(id, name, date) {
 	productsDiv.appendChild(productDiv);
 }
 
+const insertProductButton = document.getElementById("insertProductButton");
 insertProductButton.addEventListener("click", async () => {
-	const { id, name, date } = await window.sqlite.insertProduct();
-	insertProduct(id,name,date)
+	const { id, name, time } = await window.sqlite.insertProduct();
+	insertProduct(id, name, time);
 });

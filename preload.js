@@ -3,9 +3,21 @@ const postgres = require("./db/postgres");
 
 const sqliteDriver = require("./db/sqlite");
 
-async function getProducts() {
+async function createTable() {
 	const sqlite = await sqliteDriver();
-	// await sqlite.run("CREATE TABLE Products (id, name, time)");
+
+	try {
+		await sqlite.run("CREATE TABLE Products (id, name, time)");
+		// not really returning anywhere
+		return { status: 200, message: "Table created." };
+	} catch (err) {
+		return { status: 400, message: err };
+	}
+}
+async function getProducts() {
+	await createTable();
+	const sqlite = await sqliteDriver();
+
 	let products = [];
 
 	await sqlite.each("SELECT * FROM Products", function (err, row) {
@@ -26,12 +38,12 @@ async function deleteProduct(id) {
 async function insertProduct() {
 	const sqlite = await sqliteDriver();
 	const id = Math.random();
-	const date = new Date().toLocaleTimeString();
+	const time = new Date().toLocaleTimeString();
 	const name = "Oranges";
-	await sqlite.run("INSERT INTO Products VALUES (?, ?, ?)", [id, name, date]);
+	await sqlite.run("INSERT INTO Products VALUES (?, ?, ?)", [id, name, time]);
 
 	sqlite.close();
-	return { id, name, date };
+	return { id, name, time };
 }
 
 contextBridge.exposeInMainWorld("sqlite", {
