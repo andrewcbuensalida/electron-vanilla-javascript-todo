@@ -11,16 +11,24 @@
 	<body>
 		<div class="row">
 			<div class="container">
-				<button class="generateButton" id="generatePokemon">
+				<button class="genericButton" id="generatePokemon">
 					Generate pokemon from pokeapi.co!!
 				</button>
 				<img id="pokemonImg" width="200" height="200" />
 			</div>
 			<div class="container">
-				<button class="generateButton" id="generateDoctor">
+				<button class="genericButton" id="generateDoctor">
 					Generate doctor from local postgres</button
 				><br />
 				<span id="doctorName"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="container">
+				<button class="genericButton" id="insertProductButton">
+					Insert product into sqlite</button
+				><br />
+				<span id="products"></span>
 			</div>
 		</div>
 		<script src="./renderer.js"></script>

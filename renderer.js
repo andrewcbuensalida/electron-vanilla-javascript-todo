@@ -20,8 +20,39 @@ generatePokemon.addEventListener("click", getPokemon);
 const generateDoctor = document.getElementById("generateDoctor");
 
 generateDoctor.addEventListener("click", async () => {
-	const doctor = await window.pg.getDoctor();
+	const doctor = await window.postgres.getDoctor();
 	const doctorDiv = document.getElementById("doctorName");
 	doctorDiv.innerText = doctor.name;
+});
 
+///////////////////////////////////////////////
+const insertProductButton = document.getElementById("insertProductButton");
+
+const productsDiv = document.getElementById("products");
+
+async function getProducts() {
+	const products = await window.sqlite.getProducts();
+
+	for (let i = 0; i < products.length; i++) {
+		insertProduct(products[i].id, products[i].name, products[i].date);
+	}
+}
+
+getProducts();
+
+function insertProduct(id, name, date) {
+	const productDiv = document.createElement("div");
+	productDiv.innerHTML = "id: " + id + ", name: " + name + ", date: " + date;
+	productDiv.setAttribute("id", id);
+	productDiv.addEventListener("click", () => {
+		window.sqlite.deleteProduct(id);
+		const productDeleting = document.getElementById(id);
+		productDeleting.remove();
+	});
+	productsDiv.appendChild(productDiv);
+}
+
+insertProductButton.addEventListener("click", async () => {
+	const { id, name, date } = await window.sqlite.insertProduct();
+	insertProduct(id,name,date)
 });

@@ -23,7 +23,9 @@
 	"dependencies": {
 		"dotenv": "^16.0.1",
 		"electron-squirrel-startup": "^1.0.0",
-		"pg": "^8.7.3"
+		"pg": "^8.7.3",
+		"sqlite": "^4.1.1",
+		"sqlite3": "^5.0.8"
 	},
 	"config": {
 		"forge": {
