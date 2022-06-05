@@ -2,15 +2,17 @@
 // could also be here instead of preload since it doesn't require any node_module
 function getPokemon() {
 	fetch(
-		`https://vimpwjbth5.execute-api.us-west-1.amazonaws.com/Prod/getPokemon`
+		`https://vimpwjbth5.execute-api.us-west-1.amazonaws.com/Prod/getPokemon`,
+		{
+			headers: {
+				"x-api-key": "WEdgzXNFYZ3kZZ2J1NA5w2z3DGHprXkE12ogx7IB",
+			},
+		}
 	)
 		.then((pokemonJSON) => pokemonJSON.json())
 		.then((pokemon) => {
 			const pokemonImg = document.getElementById("pokemonImg");
-			pokemonImg.setAttribute(
-				"src",
-				pokemon.sprites.front_default
-			);
+			pokemonImg.setAttribute("src", pokemon.sprites.front_default);
 		});
 }
 

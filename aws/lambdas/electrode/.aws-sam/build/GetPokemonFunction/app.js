@@ -19,7 +19,7 @@ exports.lambdaHandler = async (event, context) => {
 	try {
 		const pokemonJSON = await axios(
 			`https://pokeapi.co/api/v2/pokemon/${
-				Math.floor(Math.random() * 151) + 1
+				Math.floor(Math.random() * 152) + 1
 			}`
 		);
 		response = {
