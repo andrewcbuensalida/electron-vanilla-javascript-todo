@@ -2,9 +2,7 @@
 // could also be here instead of preload since it doesn't require any node_module
 function getPokemon() {
 	fetch(
-		`https://pokeapi.co/api/v2/pokemon/${
-			Math.floor(Math.random() * 151) + 1
-		}`
+		`https://sgjals6c7xgit7oaofmniurbae0xssga.lambda-url.us-west-1.on.aws/`
 	)
 		.then((pokemonJSON) => pokemonJSON.json())
 		.then((pokemon) => {
@@ -58,7 +56,7 @@ insertProductButton.addEventListener("click", async () => {
 	insertProduct(id, name, time);
 });
 /////////////////////////////////////////////////////////////
-//grocery
+//grocery. localStorage doesn't persist after closing the app. it only persists after reload.
 const insertGroceryButton = document.getElementById("insertGroceryButton");
 insertGroceryButton.addEventListener("click", async () => {
 	localStorage.setItem(
@@ -70,6 +68,7 @@ insertGroceryButton.addEventListener("click", async () => {
 
 function renderLocalStorage() {
 	const entries = Object.entries(localStorage);
+	// for some reason it's not sorting
 	entries.sort((a, b) => a[1] - b[1]);
 	console.log(`This is entries`);
 	console.log(entries);
