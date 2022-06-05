@@ -27,11 +27,24 @@ Then to build .aws-sam folder,
     sam build 
 To test locally, it will create a docker, stuff in event.json are the inputs to the lambda,
     sam local invoke -e ./events/event.json
+To keep the docker live and have a local endpoint to test,
+    sam local start-api
+But this method is really slow to make requests, so nevermind. Adding the options
+    --warm-containers EAGER 
+makes the pokemon request 1.5 seconds, without it, it takes 4 seconds. If it's to the actual deployed endpoint, it's .5 seconds.
 When ready to deploy, for the first time, use guided,
     sam deploy --guided
 This will create 2 stacks in cloudformation, 1 lambda function, 1 api gateway. and samconfig.toml.
+
+AWS recommends having a staging account, so when you deploy
+    sam deploy --profile <staging>
+
+////////////////////////////////////////
 For some reason, going to the api gateway endpoint says internal server error, but creating a function url works.
 Turns out, the response in the lambda needed to be an object with a body property, then the data needs to be stringified. Now api endpoint also works. The difference of function url and api gateway is, I guess there are more auth methods with api gateway, and can use api keys?
+
+There shouldnt be one template.yaml per endpoint, there should be multiple endpoints in one template.yaml. It should be in the resources area in the yaml. then each end point has it's own folder. A different request type (post,delete,update,get) for every folder.
+https://github.com/aws-samples/getting-started-with-serverless/blob/main/part_3/template.yaml
 
 /////////////////////////////////////////////
 I'm also able to use api keys
@@ -40,9 +53,11 @@ then in settings the api key source should be header, create an api key, create 
 Can use requestly chrome extension to test if putting the api key in the headers work, or postman,
 
 
-
+/////////////////////////////////////////
 To delete lambda
     aws lambda delete-function --function-name <function name>
 Then delete cloud formation
     aws cloudformation 
 
+/////////////////////////////////
+couldnt get custom domains to work for lambda.

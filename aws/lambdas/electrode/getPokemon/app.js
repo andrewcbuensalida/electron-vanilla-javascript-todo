@@ -1,4 +1,5 @@
 const axios = require("axios");
+require('dotenv').config()
 /**
  *
  * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
@@ -15,6 +16,10 @@ exports.lambdaHandler = async (event, context) => {
 	console.log(`This is event in `);
 	console.log(event.body);
 
+    console.log(`This is process.env.myEnvironmentVariable in `)
+    console.log(process.env.myEnvironmentVariable)
+    
+
 	let response;
 	try {
 		const pokemonJSON = await axios(
@@ -27,8 +32,7 @@ exports.lambdaHandler = async (event, context) => {
 			body:  JSON.stringify(pokemonJSON.data),
 			
 		};
-		// console.log(`This is response in `)
-		// console.log(response)
+		
 	} catch (err) {
 		console.log("This is an error:" + err);
 		return err;
