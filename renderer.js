@@ -2,12 +2,15 @@
 // could also be here instead of preload since it doesn't require any node_module
 function getPokemon() {
 	fetch(
-		`https://sgjals6c7xgit7oaofmniurbae0xssga.lambda-url.us-west-1.on.aws/`
+		`https://vimpwjbth5.execute-api.us-west-1.amazonaws.com/Prod/getPokemon`
 	)
 		.then((pokemonJSON) => pokemonJSON.json())
 		.then((pokemon) => {
 			const pokemonImg = document.getElementById("pokemonImg");
-			pokemonImg.setAttribute("src", pokemon.sprites.front_default);
+			pokemonImg.setAttribute(
+				"src",
+				pokemon.sprites.front_default
+			);
 		});
 }
 

@@ -32,6 +32,7 @@ When ready to deploy, for the first time, use guided,
     sam deploy --guided
 This will create 2 stacks in cloudformation, and 1 lambda function.
 For some reason, going to the api gateway endpoint says internal server error, but creating a function url works.
+Turns out, the response in the lambda needed to be an object with a body property, then the data needs to be stringified. Now api endpoint also works.
 
 To delete lambda
     aws lambda delete-function --function-name <function name>
